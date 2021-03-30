@@ -30,7 +30,7 @@ metadata:
 # Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
 # THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
 # This list applies to the whole clustr and isn't specific to nodegroups
-availabilityZones: ["us-east-2a", "us-east-2b", "us-east-2c",  "us-east-2d",  "us-east-2e"]
+availabilityZones: ["us-east-2a", "us-east-2b", "us-east-2c"]
 
 nodeGroups:
   - name: ng-1
@@ -87,7 +87,7 @@ nodeGroups:
     instancesDistribution:
       # set your own max price. AWS spot instance prices no longer cross OnDemand price. 
       # Comment out the field to default to OnDemand as max price. 
-      maxPrice: 1.2
+      # maxPrice: 1.2
       instanceTypes: ["p2.xlarge"]
       onDemandBaseCapacity: 0
       onDemandPercentageAboveBaseCapacity: 0
@@ -97,7 +97,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "1"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-2e"]
+    availabilityZones: ["us-east-2b"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:
@@ -119,7 +119,7 @@ nodeGroups:
     instancesDistribution:
       # set your own max price. AWS spot instance prices no longer cross OnDemand price. 
       # Comment out the field to default to OnDemand as max price. 
-      maxPrice: 1.2
+      # maxPrice: 1.2
       instanceTypes: ["p3.2xlarge"]
       onDemandBaseCapacity: 0
       onDemandPercentageAboveBaseCapacity: 0
@@ -129,7 +129,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "1"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-2e"]
+    availabilityZones: ["us-east-2b"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:
@@ -161,7 +161,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "4"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-2e"]
+    availabilityZones: ["us-east-2b"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:

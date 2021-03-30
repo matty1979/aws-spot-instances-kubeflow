@@ -17,12 +17,12 @@ kind: ClusterConfig
 
 metadata:
   # Name of your cluster, change to whatever you find fit.
-  # if changed, make sure to change all nodegroup tags from 'k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
-  name: kubeflow-us-east-1
+  # if changed, make sure to change all nodegroup tags from 'k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"' --> 'k8s.io/cluster-autoscaler/your-new-name: "owned"'
+  name: kubeflow-us-east-2
   # choose your region wisely, this will significantly impact the cost incurred
-  region: us-east-1
+  region: us-east-2
   # 1.14 Kubernetes version since Kubeflow 1.0 has been tested with the same.
-  version: '1.14'
+  version: '1.19'
   tags:
     # Add more cloud tags if needed for billing
     environment: staging
@@ -30,7 +30,7 @@ metadata:
 # Add all possible AZs to ensure nodes can be spun up in any AZ later on. 
 # THIS CAN'T BE CHANGED LATER. YOU WILL HAVE TO CREATE A NEW CLUSTER TO ADD NEW AZ SUPPORT.
 # This list applies to the whole clustr and isn't specific to nodegroups
-availabilityZones: ["us-east-1a", "us-east-1b",  "us-east-1d",  "us-east-1f"]
+availabilityZones: ["us-east-2a", "us-east-2b", "us-east-2c",  "us-east-2d",  "us-east-2e"]
 
 nodeGroups:
   - name: ng-1
@@ -42,7 +42,7 @@ nodeGroups:
     volumeSize: 100
     volumeType: gp2
     instanceType: m5a.2xlarge
-    availabilityZones: ["us-east-1a"]
+    availabilityZones: ["us-east-2a"]
     labels:
       node-class: "worker-node"
     tags:
@@ -51,7 +51,7 @@ nodeGroups:
       k8s.io/cluster-autoscaler/node-template/label/aws.amazon.com/spot: "false"
       k8s.io/cluster-autoscaler/node-template/label/gpu-count: "0"
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+      k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
     iam:
       withAddonPolicies:
         albIngress: true
@@ -65,7 +65,7 @@ nodeGroups:
     volumeSize: 20
     volumeType: gp2
     instanceType: m5a.2xlarge
-    availabilityZones: ["us-east-1a"]
+    availabilityZones: ["us-east-2a"]
     labels:
       node-class: "worker-node"
     tags:
@@ -74,7 +74,7 @@ nodeGroups:
       k8s.io/cluster-autoscaler/node-template/label/aws.amazon.com/spot: "false"
       k8s.io/cluster-autoscaler/node-template/label/gpu-count: "0"
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+      k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
     iam:
       withAddonPolicies:
         albIngress: true
@@ -97,7 +97,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "1"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-1f"]
+    availabilityZones: ["us-east-2e"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:
@@ -106,7 +106,7 @@ nodeGroups:
       k8s.io/cluster-autoscaler/node-template/label/gpu-count: "1"
       k8s.io/cluster-autoscaler/node-template/taint/spotInstance: "true:PreferNoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+      k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
     iam:
       withAddonPolicies:
         autoScaler: true
@@ -129,7 +129,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "1"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-1f"]
+    availabilityZones: ["us-east-2e"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:
@@ -138,7 +138,7 @@ nodeGroups:
       k8s.io/cluster-autoscaler/node-template/label/gpu-count: "1"
       k8s.io/cluster-autoscaler/node-template/taint/spotInstance: "true:PreferNoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+      k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
     iam:
       withAddonPolicies:
         autoScaler: true
@@ -161,7 +161,7 @@ nodeGroups:
       aws.amazon.com/spot: "true"
       gpu-count: "4"
     # Stick to one AZ for all GPU nodes. In case of termination, this will prevent volumes from being unavailable if the new instance got spun up in another AZ.
-    availabilityZones: ["us-east-1f"]
+    availabilityZones: ["us-east-2e"]
     taints:
       spotInstance: "true:PreferNoSchedule"
     tags:
@@ -170,7 +170,7 @@ nodeGroups:
       k8s.io/cluster-autoscaler/node-template/label/gpu-count: "4"
       k8s.io/cluster-autoscaler/node-template/taint/spotInstance: "true:PreferNoSchedule"
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+      k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
     iam:
       withAddonPolicies:
         autoScaler: true
@@ -192,7 +192,7 @@ nodeGroups:
   #     lifecycle: Ec2Spot
   #     aws.amazon.com/spot: "true"
   #     gpu-count: "8"
-  #   availabilityZones: ["us-east-1f"]
+  #   availabilityZones: ["us-east-2e"]
   #   taints:
   #     spotInstance: "true:PreferNoSchedule"
   #   tags:
@@ -201,7 +201,7 @@ nodeGroups:
   #     k8s.io/cluster-autoscaler/node-template/label/gpu-count: "8"
   #     k8s.io/cluster-autoscaler/node-template/taint/spotInstance: "true:PreferNoSchedule"
   #     k8s.io/cluster-autoscaler/enabled: "true"
-  #     k8s.io/cluster-autoscaler/kubeflow-us-east-1: "owned"
+  #     k8s.io/cluster-autoscaler/kubeflow-us-east-2: "owned"
   #   iam:
   #     withAddonPolicies:
   #       autoScaler: true

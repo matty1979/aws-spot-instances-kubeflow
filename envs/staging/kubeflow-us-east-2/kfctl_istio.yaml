@@ -1,9 +1,9 @@
 apiVersion: kfdef.apps.kubeflow.org/v1
 kind: KfDef
 metadata:
-  clusterName: kubeflow-us-east-1.us-east-1.eksctl.io
+  clusterName: kubeflow-us-east-2.us-east-2.eksctl.io
   creationTimestamp: null
-  name: kubeflow-us-east-1
+  name: kubeflow-us-east-2
   namespace: kubeflow
 spec:
   applications:
@@ -335,7 +335,7 @@ spec:
       - name: oidcUserInfoEndpoint
         value: https://kubeflow-spot.auth0.com/userinfo
       - name: certArn
-        value: arn:aws:acm:us-east-1:########:certificate/#######-#####-###-#
+        value: arn:aws:acm:us-east-2:########:certificate/#######-#####-###-#
       - name: oidcSecretName
         value: alb-oidc-secret
       repoRef:
@@ -361,7 +361,7 @@ spec:
       - application
       parameters:
       - name: clusterName
-        value: kubeflow-us-east-1
+        value: kubeflow-us-east-2
       repoRef:
         name: manifests
         path: aws/aws-alb-ingress-controller
@@ -382,14 +382,14 @@ spec:
       auth:
         enablePodIamPolicy: true
         oidc:
-          certArn: arn:aws:acm:us-east-1:########:certificate/#######-#####-###-#
+          certArn: arn:aws:acm:us-east-2:########:certificate/#######-#####-###-#
           oAuthClientId: ENTER_YOUR_CLIENT_ID
           oAuthClientSecret: ENTER_YOUR_SECRET
           oidcAuthorizationEndpoint: https://kubeflow-spot.auth0.com/authorize
           oidcIssuer: https://kubeflow-spot.auth0.com/
           oidcTokenEndpoint: https://kubeflow-spot.auth0.com/oauth/token
           oidcUserInfoEndpoint: https://kubeflow-spot.auth0.com/userinfo
-        region: us-east-1
+        region: us-east-2
   repos:
   - name: manifests
     uri: https://github.com/kubeflow/manifests/archive/v1.0-branch.tar.gz
